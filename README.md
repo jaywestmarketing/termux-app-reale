@@ -1,3 +1,38 @@
+---
+status: IN_PROGRESS
+deadline: 2026-07-15
+cost_estimate: $30.00
+roi_projection: +18.0%
+last_updated: 2026-06-14
+---
+
+## Executive Summary
+Termux is a multi-module Android application that turns Android devices into a terminal, Linux userspace launcher, and app/plugin integration host. This fork can collaborate best on Android app work when the README is kept as a compact source of truth for build status, dependency constraints, pattern-matching risk, user data policy prompts, and module ownership.
+
+## Architecture & Logic
+- **Modules:** `:app` is the Android application shell; `:termux-shared` contains reusable Android, shell, file, markdown, networking, local-socket, and Termux integration utilities; `:terminal-emulator` parses terminal control sequences; `:terminal-view` renders and handles terminal UI/input.
+- **Build stack:** Gradle Android plugin `8.13.2`, compile SDK `36`, min SDK `21`, target SDK `28`, Java 8 compatibility, AndroidX, Material Components, Guava, Markwon, native `ndk-build`, and bootstrap ZIP downloads from Termux package releases.
+- **Networks configuration:** Network-sensitive code is concentrated in URL/URI utilities, local socket managers, `RUN_COMMAND`/plugin intent handoff, bootstrap download tasks, package repository documentation, and remote/community resource links.
+- **Pattern matching audit:** Current matching systems include Java `switch` dispatch in terminal parsing and settings code, regex validation in Gradle version names, shared text URL/magnet detection, Markdown backtick parsing, Android property parsing, shell environment variable checks, file permission checks, and Termux URL extraction. Java standard regex and Android `Patterns` are used directly; no standalone pattern-matching library upgrade is required in this documentation-only change.
+- **Collaboration model for Android apps:** Use `:terminal-view` and `:terminal-emulator` when embedding terminal UX in another Android app, use `:termux-shared` for shell/file/network helpers, keep app/plugin signing and `sharedUserId` constraints explicit, and document every feature impact here before handing work to an on-device Local LLM. Assume contributors may not have root access: prefer normal app permissions, Android Studio/ADB debugging, wireless debugging, SAF/document-provider flows, and signed debug APK install/reinstall paths over root-only workarounds.
+- **User license and data usage prompt requirement:** Any new app initialization, onboarding, or first-run flow should require users to accept product policy restrictions, applicable regulations, and terms covering data use for future training projects and pattern analysis before optional telemetry, logs, or user-provided artifacts are processed.
+- **Compatibility audit:** This repository remains compatible with Android `>= 7` for full package support while retaining limited app-only paths for Android 5/6. Future work should preserve Java 8/desugaring constraints, native ABI split expectations, bootstrap variant compatibility, plugin signature alignment, and Android 12+ phantom-process behavior notes. Non-root devices cannot rely on `setprop`, privileged settings writes, bypassing APK signature mismatches, or direct access to other apps' private data; root-only references should be treated as optional diagnostics, not baseline collaboration requirements.
+
+## Recent Changes & Changelog
+- 2026-06-14: Added non-root collaboration constraints so Android app workflows prioritize ADB/debug builds, normal app permissions, SAF/document-provider access, and non-privileged diagnostics.
+- 2026-06-14: Added Local-LLM-readable metadata and collaboration guidance to make the README a structured coordination surface for Android app development.
+- 2026-06-14: Documented module boundaries, build stack, network-sensitive surfaces, user license/data prompt expectations, and pattern-matching compatibility findings.
+- 2026-06-14: No production code or dependency versions were changed; cost and ROI reflect the documentation and architecture-analysis iteration only.
+
+## Context & Web Resources
+- Termux website: https://termux.dev
+- Termux app repository: https://github.com/termux/termux-app
+- Termux packages repository: https://github.com/termux/termux-packages
+- Termux package management wiki: https://github.com/termux/termux-packages/wiki/Package-Management
+- Android `sharedUserId` documentation: https://developer.android.com/guide/topics/manifest/manifest-element
+- Android logcat documentation: https://developer.android.com/studio/command-line/logcat
+- SemVer specification used by Gradle validation: https://semver.org/spec/v2.0.0.html
+
 # Termux application
 
 [![Build status](https://github.com/termux/termux-app/workflows/Build/badge.svg)](https://github.com/termux/termux-app/actions)
